@@ -6,12 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Todo List</title>
 
-
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Roboto Mono -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200;400&display=swap" rel="stylesheet">
+  <!-- Tilt Prism -->
   <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet"> 
   
+  <!-- Iconscout CDN -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+  <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="style.css">
   
 </head>
@@ -22,13 +28,27 @@
         <h3>A Todo List App</h3>
       </div>
     </div>
+
+    <!-- =========================  Projects ========================= -->
+    <div class="project__container">
+      <button class="project__button"><i class="uil uil-sliders-v-alt"></i></button>
+      <select class="projects" name="projects" id="projects">
+        <option value="project0">All</option>
+        <option value="project1">Project 1</option>
+        <option value="project2">Project 2</option>
+        <option value="project3">Project 3</option>
+      </select>
+    </div>
+
+    <!-- =========================  Add Todo ========================= -->
     <div class="add__todo__container">
       <div class="add__todo">
         <input type="text" placeholder="Write a note...">
       </div>
       <button type="submit" class="btn">Add</button>
     </div>
-    
+
+    <!-- =========================  Todo List ========================= -->
     <div class="todo__container">
       <div class="todo">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti voluptatum nihil nobis unde quibusdam eveniet.
