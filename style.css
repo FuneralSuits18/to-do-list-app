@@ -1,0 +1,110 @@
+:root {
+    --color-primary: #303030;
+    --color-border: #6b5151;
+    --color-white: #f2f2fe;
+    --color-bg: #222121;
+    --color-bg-light: #3d3535;
+    --color-black: #000000;
+
+    --transition: all 300ms ease;
+
+    --border-radius-1: 0.3rem;
+    --border-radius-2: 0.5rem;
+    --border-radius-3: 0.8rem;
+    --border-radius-4: 2rem;
+    --border-radius-5: 5rem;
+}
+
+/* ============================================== GENERAL ============================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    appearance: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace, sans-serif;
+    font-weight: 200;
+    line-height: 1.6;
+    color: var(--color-white);
+    overflow-x: hidden;
+    background-color: var(--color-bg);
+    color: var(--color-white);
+}
+
+.container {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.header__container{
+    width: 100%;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+}
+
+.header {
+    font-family: 'Tilt Prism', cursive;
+}
+
+.add__todo__container {
+    display: flex;
+    align-items: center;
+    
+}
+
+input {
+    font-family: inherit;
+    margin-top: 2rem;
+    padding: 0.8rem 1.4rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    background-color: var(--color-bg);
+    color: var(--color-white);
+    width: 25rem;
+}
+
+.btn {
+    font: inherit;
+    margin: 2rem 0 0 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--color-bg);
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    color: var(--color-white);
+    transition: var(--transition);
+}
+
+.btn:hover {
+    background-color: var(--color-bg-light);
+}
+
+.todo__container {
+    padding-top: 1rem;
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.todo {
+    margin: 0.5rem;
+    max-width: 15rem;
+    padding: 0.6rem 1.2rem;
+    /* background-color: var(--color-primary); */
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid var(--color-border);
+}
