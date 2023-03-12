@@ -1,0 +1,1 @@
+(()=>{"use strict";const t=new class{constructor(t,s,o,i){this.title=t,this.description=s,this.dueDate=o,this.priority=i}}("A new todo","desc","20-03-23",2),s=new class{constructor(){this.todoList=[]}addTodo(t){this.todoList.push(t)}};s.addTodo(t),console.table(s)})();
