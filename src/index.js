@@ -1,6 +1,8 @@
 import Todo from './todo';
 import Project from './project';
-import { projectsDOM, todoContainerDOM, addTodoItemDOM } from './dom';
+import {
+  projectsDOM, todoContainerDOM, addTodoItemDOM, removeTodoItemDOM,
+} from './dom';
 
 const todo0 = new Todo('A new todo', 'desc', 6, 56);
 const project0 = new Project('Project 0');

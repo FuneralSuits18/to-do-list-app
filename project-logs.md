@@ -1,3 +1,18 @@
+# Works
+
+## domjs
+- edit addTodoItem function to input todo obj
+
+## html css
+- projects class - instead of option, use div. search dropdown. Update css accordingly
+- upon selecting a todo, it should look like the keeps notes
+
+## project.js
+- project should have an id. Use that id in html div
+- how to add id automatically for every obj like database?
+
+<br>
+
 # Ideas
 
 ## Projects

@@ -1,7 +1,9 @@
 const projectsDOM = document.querySelector('.projects');
 
-function addProjectDOM(name) {
-
+function addProjectDOM(project) {
+  const projectItem = document.createElement('option');
+  projectItem.value = project.name;
+  projectItem.textContent = project.name;
 }
 
 const todoContainerDOM = document.querySelector('.todo__container');
@@ -28,4 +30,15 @@ function addTodoItemDOM(title, description, duedate = 0, priority = 0) {
   todoContainerDOM.appendChild(todoItemDOM);
 }
 
-export { projectsDOM, todoContainerDOM, addTodoItemDOM };
+function removeTodoItemDOM(todo) {
+  const todoItemList = todoContainerDOM.childNodes;
+  todoItemList.forEach((todoItem) => {
+    if (todo.title === todoItem.querySelector('.todo__title').textContent && todo.description === todoItem.querySelector('.todo__description').textContent) {
+      todoItem.remove();
+    }
+  });
+}
+
+export {
+  projectsDOM, todoContainerDOM, addTodoItemDOM, removeTodoItemDOM,
+};
