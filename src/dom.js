@@ -10,19 +10,22 @@ const todoContainerDOM = document.querySelector('.todo__container');
 
 function addTodoItemDOM(title, description, duedate = 0, priority = 0) {
   const todoItemDOM = document.createElement('div');
-  todoItemDOM.classList.add('todo');
   const todoItemTitleDOM = document.createElement('div');
-  todoItemTitleDOM.classList.add('todo__title');
-  todoItemTitleDOM.textContent = title;
   const todoItemDescriptionDOM = document.createElement('div');
-  todoItemDescriptionDOM.classList.add('todo__description');
-  todoItemDescriptionDOM.textContent = description;
   const todoItemDuedateDOM = document.createElement('div');
-  todoItemDuedateDOM.classList.add('duedate');
-  todoItemDuedateDOM.textContent = duedate;
   const todoItemPriorityDOM = document.createElement('div');
+
+  todoItemDOM.classList.add('todo');
+  todoItemTitleDOM.classList.add('todo__title');
+  todoItemDescriptionDOM.classList.add('todo__description');
+  todoItemDuedateDOM.classList.add('duedate');
   todoItemPriorityDOM.classList.add('priority');
+
+  todoItemTitleDOM.textContent = title;
+  todoItemDescriptionDOM.textContent = description;
+  todoItemDuedateDOM.textContent = duedate;
   todoItemPriorityDOM.textContent = priority;
+
   todoItemDOM.appendChild(todoItemTitleDOM);
   todoItemDOM.appendChild(todoItemDescriptionDOM);
   todoItemDOM.appendChild(todoItemDuedateDOM);
