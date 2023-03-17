@@ -1,5 +1,13 @@
 const projectsDOM = document.querySelector('.projects');
 
+// show projects
+function showProjects() {
+  const projects = document.querySelector('.hidden');
+  projects.classList.toggle('.show__projects');
+}
+const showProjectButton = document.querySelector('.shown');
+showProjectButton.addEventListener('click', showProjects);
+
 function addProjectDOM(project) {
   const projectItem = document.createElement('option');
   projectItem.value = project.name;
@@ -40,6 +48,14 @@ function removeTodoItemDOM(todo) {
       todoItem.remove();
     }
   });
+}
+
+const todo = document.querySelector('.todo');
+todo.addEventListener('click', loadElement);
+
+function loadElement() {
+  todo.style.position = 'absolute';
+  todo.style.width;
 }
 
 export {
