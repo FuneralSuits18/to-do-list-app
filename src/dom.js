@@ -1,14 +1,28 @@
-/** Function to show projects when clicked on .projects.shown  */
+/* eslint-disable max-len */
+
+/** Shows projects when clicked on .projects.shown  */
 function showProjects() {
   const projects = document.querySelector('.hidden');
-  projects.classList.toggle('.show__projects');
+  projects.classList.toggle('show__projects');
 }
 const showProjectButton = document.querySelector('.shown');
 showProjectButton.addEventListener('click', showProjects);
 
 /**
+ * Hides project list if clicked on anywhere on the screen but .projects.shown
+ * @param {node} element
+ */
+function hideProjects(element) {
+  if (!element.target.matches('.shown')) {
+    const hidden = document.querySelector('.hidden');
+    hidden.classList.remove('show__projects');
+  }
+}
+window.onclick = hideProjects;
+
+/**
  * Adds a project DOM
- * @param {project} project
+ * @param {Project} project
  */
 function addProjectDOM(project) {
   const ul = document.querySelector('.project__ul');
@@ -19,7 +33,7 @@ function addProjectDOM(project) {
 
 /**
  * Adds a todo DOM
- * @param {todo} todo
+ * @param {Todo} todo
  */
 function addTodoItemDOM(todo) {
   const todoContainerDOM = document.querySelector('.todo__container');
@@ -47,6 +61,10 @@ function addTodoItemDOM(todo) {
   todoContainerDOM.appendChild(todoItemDOM);
 }
 
+/**
+ * Removes a todo DOM
+ * @param {todo} todo
+ */
 function removeTodoItemDOM(todo) {
   const todoItemList = todoContainerDOM.childNodes;
   todoItemList.forEach((todoItem) => {
@@ -56,13 +74,15 @@ function removeTodoItemDOM(todo) {
   });
 }
 
-const todo = document.querySelector('.todo');
-todo.addEventListener('click', loadElement);
-
+/**
+ * Loads a todo DOM to take focus
+ */
 function loadElement() {
   todo.style.position = 'absolute';
   todo.style.width;
 }
+const todo = document.querySelector('.todo');
+todo.addEventListener('click', loadElement);
 
 export {
   addProjectDOM, addTodoItemDOM, removeTodoItemDOM,

@@ -78,6 +78,7 @@ body {
     border-radius: 0.5rem;
     margin-left: 1rem;
     padding: 0.5rem;
+    cursor: pointer;
     /* transition: var(--transition); */
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.274);
     
@@ -100,7 +101,7 @@ body {
     opacity: 1;
 }
 
-.hidden:hover {
+/* .hidden:hover {
     visibility: visible;
     opacity: 1;
 } */
