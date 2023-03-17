@@ -1,7 +1,7 @@
 # Works
 
-## domjs
-- edit addTodoItem function to input todo obj
+## index.js
+- Check for conditions to add todo without duedate/priority. Pass to addTodoItemDOM
 
 ## html css
 - projects class - instead of option, use div. search dropdown. Update css accordingly

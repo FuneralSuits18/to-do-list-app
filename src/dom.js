@@ -1,6 +1,4 @@
-const projectsDOM = document.querySelector('.projects');
-
-// show projects
+/** Function to show projects when clicked on .projects.shown  */
 function showProjects() {
   const projects = document.querySelector('.hidden');
   projects.classList.toggle('.show__projects');
@@ -8,15 +6,23 @@ function showProjects() {
 const showProjectButton = document.querySelector('.shown');
 showProjectButton.addEventListener('click', showProjects);
 
+/**
+ * Adds a project DOM
+ * @param {project} project
+ */
 function addProjectDOM(project) {
-  const projectItem = document.createElement('option');
-  projectItem.value = project.name;
-  projectItem.textContent = project.name;
+  const ul = document.querySelector('.project__ul');
+  const li = document.createElement('li');
+  li.textContent = project.name;
+  ul.appendChild(li);
 }
 
-const todoContainerDOM = document.querySelector('.todo__container');
-
-function addTodoItemDOM(title, description, duedate = 0, priority = 0) {
+/**
+ * Adds a todo DOM
+ * @param {todo} todo
+ */
+function addTodoItemDOM(todo) {
+  const todoContainerDOM = document.querySelector('.todo__container');
   const todoItemDOM = document.createElement('div');
   const todoItemTitleDOM = document.createElement('div');
   const todoItemDescriptionDOM = document.createElement('div');
@@ -29,10 +35,10 @@ function addTodoItemDOM(title, description, duedate = 0, priority = 0) {
   todoItemDuedateDOM.classList.add('duedate');
   todoItemPriorityDOM.classList.add('priority');
 
-  todoItemTitleDOM.textContent = title;
-  todoItemDescriptionDOM.textContent = description;
-  todoItemDuedateDOM.textContent = duedate;
-  todoItemPriorityDOM.textContent = priority;
+  todoItemTitleDOM.textContent = todo.title;
+  todoItemDescriptionDOM.textContent = todo.description;
+  todoItemDuedateDOM.textContent = todo.duedate;
+  todoItemPriorityDOM.textContent = todo.priority;
 
   todoItemDOM.appendChild(todoItemTitleDOM);
   todoItemDOM.appendChild(todoItemDescriptionDOM);
@@ -59,5 +65,5 @@ function loadElement() {
 }
 
 export {
-  projectsDOM, todoContainerDOM, addTodoItemDOM, removeTodoItemDOM,
+  addProjectDOM, addTodoItemDOM, removeTodoItemDOM,
 };
