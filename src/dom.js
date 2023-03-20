@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
 
-/** Shows projects when clicked on .projects.shown  */
-function showProjects() {
+/** Shows or hides projects when clicked on .projects.shown  */
+function toggleProjects() {
   const projects = document.querySelector('.hidden');
   projects.classList.toggle('show__projects');
 }
 const showProjectButton = document.querySelector('.shown');
-showProjectButton.addEventListener('click', showProjects);
+showProjectButton.addEventListener('click', toggleProjects);
 
 /**
  * Hides project list if clicked on anywhere on the screen but .projects.shown
@@ -75,14 +75,36 @@ function removeTodoItemDOM(todo) {
 }
 
 /**
- * Loads a todo DOM to take focus
+ * Loads a todo to focus
+ * @param {node} element
  */
-function loadElement() {
-  todo.style.position = 'absolute';
-  todo.style.width;
+function loadElement(element) {
+  if (element.target.classList.contains('todo__overlay')) {
+    element.target.classList.remove('todo__overlay');
+    element.target.parentNode.classList.toggle('todo__load');
+    element.target.parentNode.classList.add('todo__load__flag');
+  }
 }
-const todo = document.querySelector('.todo');
-todo.addEventListener('click', loadElement);
+window.onclick = loadElement;
+
+/**
+ * Unfocuses todo if clicked on anywhere on the screen but the focused todo
+ * @param {node} element
+ */
+function unfocusTodo(element) {
+  const todoLoaded = document.querySelector('.todo__load__flag');
+  if (todoLoaded == null);
+  else {
+    if (!element.target.matches('.todo__wrapper') && !element.target.matches('.todo') && !element.target.matches('.todo__title') && !element.target.matches('.todo__description') && !element.target.matches('.duedate') && !element.target.matches('.todo__priority')) {
+      const overlayPlaceholder = todoLoaded.querySelector('.overlay__placeholder');
+      overlayPlaceholder.classList.add('todo__overlay');
+      todoLoaded.classList.toggle('todo__load');
+      todoLoaded.classList.remove('todo__load__flag');
+    }
+  }
+}
+
+document.addEventListener('click', unfocusTodo);
 
 export {
   addProjectDOM, addTodoItemDOM, removeTodoItemDOM,

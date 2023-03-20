@@ -4,7 +4,6 @@
 - Check for conditions to add todo without duedate/priority. Pass to addTodoItemDOM
 
 ## html css
-- projects class - instead of option, use div. search dropdown. Update css accordingly
 - upon selecting a todo, it should look like the keeps notes
 
 ## project.js
