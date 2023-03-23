@@ -18,7 +18,7 @@ function hideProjects(element) {
     hidden.classList.remove('show__projects');
   }
 }
-window.onclick = hideProjects;
+document.addEventListener('click', hideProjects);
 
 /**
  * Adds a project DOM
@@ -80,12 +80,48 @@ function removeTodoItemDOM(todo) {
  */
 function loadElement(element) {
   if (element.target.classList.contains('todo__overlay')) {
-    element.target.classList.remove('todo__overlay');
-    element.target.parentNode.classList.toggle('todo__load');
-    element.target.parentNode.classList.add('todo__load__flag');
+    element.target.classList.add('todo__overlay__loaded');
+
+    // Remove animation class from todos
+    const todoWrapperAnimation = document.querySelectorAll('.todo__wrapper__animation');
+    todoWrapperAnimation.forEach((div) => {
+      div.classList.remove('todo__wrapper__animation');
+    });
+
+    // =========================================================================
+    // CHANGE TO TEXTCONTENT AND DIV/STYLE TODOLOADED DIV LATER
+    // =========================================================================
+    // Get todo info and load it into todoLoaded
+    const todo = element.target.previousElementSibling;
+    const todoTitle = todo.querySelector('.todo__title').textContent;
+    const todoDescription = todo.querySelector('.todo__description').textContent;
+    const todoDuedate = todo.querySelector('.duedate') ? todo.querySelector('.duedate').textContent : 0;
+    const todoPriority = todo.querySelector('.priority') ? todo.querySelector('.priority').textContent : 0;
+
+    // Load todo info into a div
+    const todoLoaded = document.createElement('div');
+    const todoLoadedTitle = document.createElement('div');
+    const todoLoadedDescription = document.createElement('div');
+    const todoLoadedDuedate = document.createElement('div');
+    const todoLoadedPriority = document.createElement('div');
+
+    todoLoadedTitle.classList.add('todo__title');
+    todoLoadedDescription.classList.add('todo__description');
+    todoLoadedDuedate.classList.add('duedate');
+    todoLoadedPriority.classList.add('priority');
+
+    todoLoadedTitle.textContent = todoTitle;
+    todoLoadedDescription.textContent = todoDescription;
+    todoLoadedDuedate.textContent = todoDuedate;
+    todoLoadedPriority.textContent = todoPriority;
+
+    todoLoaded.classList.add('todo__load');
+    todoLoaded.append(todoLoadedTitle, todoLoadedDescription, todoLoadedDuedate, todoLoadedPriority);
+    console.log(todoLoaded);
+    todo.parentNode.parentNode.appendChild(todoLoaded);
   }
 }
-window.onclick = loadElement;
+window.addEventListener('click', loadElement);
 
 /**
  * Unfocuses todo if clicked on anywhere on the screen but the focused todo
@@ -103,7 +139,6 @@ function unfocusTodo(element) {
     }
   }
 }
-
 document.addEventListener('click', unfocusTodo);
 
 export {
