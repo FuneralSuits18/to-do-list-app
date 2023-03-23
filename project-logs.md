@@ -4,7 +4,7 @@
 - Check for conditions to add todo without duedate/priority. Pass to addTodoItemDOM
 
 ## html css
-- upon selecting a todo, it should look like the keeps notes
+- animation for loading/unloading todo
 
 ## project.js
 - project should have an id. Use that id in html div
@@ -21,5 +21,4 @@
 - shift a todo to different project?
   
 ## Todo list
-- on click, darkens everything else and shows the todo in the middle and enlarged.
 - if there's no text in a todo, it is removed from the list.
