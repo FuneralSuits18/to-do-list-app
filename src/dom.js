@@ -78,64 +78,67 @@ function removeTodoItemDOM(todo) {
  * Loads a todo to focus
  * @param {node} element
  */
-function loadElement(element) {
+function loadTodo(element) {
   if (element.target.classList.contains('todo__overlay')) {
     element.target.classList.add('todo__overlay__loaded');
 
     // Remove animation class from todos
-    const todoWrapperAnimation = document.querySelectorAll('.todo__wrapper__animation');
-    todoWrapperAnimation.forEach((div) => {
+    const todoWrapper = document.querySelectorAll('.todo__wrapper');
+    todoWrapper.forEach((div) => {
       div.classList.remove('todo__wrapper__animation');
     });
 
-    // =========================================================================
-    // CHANGE TO TEXTCONTENT AND DIV/STYLE TODOLOADED DIV LATER
-    // =========================================================================
-    // Get todo info and load it into todoLoaded
+    // Get todo info text
     const todo = element.target.previousElementSibling;
     const todoTitle = todo.querySelector('.todo__title').textContent;
     const todoDescription = todo.querySelector('.todo__description').textContent;
     const todoDuedate = todo.querySelector('.duedate') ? todo.querySelector('.duedate').textContent : 0;
     const todoPriority = todo.querySelector('.priority') ? todo.querySelector('.priority').textContent : 0;
 
-    // Load todo info into a div
+    // Create todo's divs
     const todoLoaded = document.createElement('div');
     const todoLoadedTitle = document.createElement('div');
     const todoLoadedDescription = document.createElement('div');
     const todoLoadedDuedate = document.createElement('div');
     const todoLoadedPriority = document.createElement('div');
 
+    todoLoaded.classList.add('todo__load');
     todoLoadedTitle.classList.add('todo__title');
     todoLoadedDescription.classList.add('todo__description');
     todoLoadedDuedate.classList.add('duedate');
     todoLoadedPriority.classList.add('priority');
 
+    // Load todo info to the new divs
     todoLoadedTitle.textContent = todoTitle;
     todoLoadedDescription.textContent = todoDescription;
     todoLoadedDuedate.textContent = todoDuedate;
     todoLoadedPriority.textContent = todoPriority;
 
-    todoLoaded.classList.add('todo__load');
+    // Append todoLoaded to .todo__container
     todoLoaded.append(todoLoadedTitle, todoLoadedDescription, todoLoadedDuedate, todoLoadedPriority);
-    console.log(todoLoaded);
     todo.parentNode.parentNode.appendChild(todoLoaded);
   }
 }
-window.addEventListener('click', loadElement);
+window.addEventListener('click', loadTodo);
 
 /**
  * Unfocuses todo if clicked on anywhere on the screen but the focused todo
  * @param {node} element
  */
 function unfocusTodo(element) {
-  const todoLoaded = document.querySelector('.todo__load__flag');
+  const todoLoaded = document.querySelector('.todo__load');
   if (todoLoaded == null);
   else {
-    if (!element.target.matches('.todo__wrapper') && !element.target.matches('.todo') && !element.target.matches('.todo__title') && !element.target.matches('.todo__description') && !element.target.matches('.duedate') && !element.target.matches('.todo__priority')) {
-      const overlayPlaceholder = todoLoaded.querySelector('.overlay__placeholder');
-      overlayPlaceholder.classList.add('todo__overlay');
-      todoLoaded.classList.toggle('todo__load');
-      todoLoaded.classList.remove('todo__load__flag');
+    if (!element.target.matches('.todo__load') && !element.target.matches('.todo__title') && !element.target.matches('.todo__description') && !element.target.matches('.duedate') && !element.target.matches('.priority')) {
+      const overlayLoaded = document.querySelector('.todo__overlay__loaded');
+      overlayLoaded.classList.remove('todo__overlay__loaded');
+
+      const todoWrapper = document.querySelectorAll('.todo__wrapper');
+      todoWrapper.forEach((div) => {
+        div.classList.add('todo__wrapper__animation');
+      });
+
+      todoLoaded.remove();
     }
   }
 }
