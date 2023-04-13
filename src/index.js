@@ -13,6 +13,6 @@ project0.addTodo(todo0);
 project0.addTodo(todo1);
 project0.addTodo(todo2);
 
-// project0.todoList.forEach((element) => {
-//   addTodoItemDOM(element);
-// });
+project0.todoList.forEach((element) => {
+  addTodoItemDOM(element);
+});

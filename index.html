@@ -50,9 +50,30 @@
 
     <!-- =========================  Add Todo ========================= -->
     <div class="add__todo__container">
-      <div class="add__todo">
+      <form action="" class="add__todo">
         <input type="text" placeholder="Write a note...">
-      </div>
+      </form>
+      
+      <form action="" class="add__todo" method="post">
+        <input name="title" class="title" type="text" placeholder="Title">
+        <textarea name="description" id="" cols="" rows="5" placeholder="Write a note..."></textarea>
+        <div class="set__priority">
+          Priority:
+          <div class="prioritybtn__container">
+            <div class="shown__priority">None</div>
+            <div class="hidden__priority">
+              <ul class="project__ul">
+                <li>None</li>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>Maximum</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
 
     <!-- =========================  Todo List ========================= -->

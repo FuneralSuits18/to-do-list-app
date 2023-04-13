@@ -32,22 +32,48 @@ function addProjectDOM(project) {
 }
 
 /**
+ * Shows the hidden priorities
+ */
+function showHiddenPriority() {
+  const hidden = document.querySelector('.hidden__priority');
+  hidden.classList.toggle('show__priorities');
+}
+const showPriorities = document.querySelector('.shown__priority');
+showPriorities.addEventListener('click', showHiddenPriority);
+
+/**
+ *
+ * @param {node} element
+ */
+function hidePriorities(element) {
+  if (!element.target.matches('.shown__priority')) {
+    const hidden = document.querySelector('.hidden__priority');
+    hidden.classList.remove('show__priorities');
+  }
+}
+document.addEventListener('click', hidePriorities);
+
+/**
  * Adds a todo DOM
  * @param {Todo} todo
  */
 function addTodoItemDOM(todo) {
   const todoContainerDOM = document.querySelector('.todo__container');
+  const todoWrapperDOM = document.createElement('div');
   const todoItemDOM = document.createElement('div');
   const todoItemTitleDOM = document.createElement('div');
   const todoItemDescriptionDOM = document.createElement('div');
   const todoItemDuedateDOM = document.createElement('div');
   const todoItemPriorityDOM = document.createElement('div');
+  const todoOverlayDOM = document.createElement('div');
 
   todoItemDOM.classList.add('todo');
+  todoWrapperDOM.classList.add('todo__wrapper__animation', 'todo__wrapper');
   todoItemTitleDOM.classList.add('todo__title');
   todoItemDescriptionDOM.classList.add('todo__description');
   todoItemDuedateDOM.classList.add('duedate');
   todoItemPriorityDOM.classList.add('priority');
+  todoOverlayDOM.classList.add('todo__overlay');
 
   todoItemTitleDOM.textContent = todo.title;
   todoItemDescriptionDOM.textContent = todo.description;
@@ -58,7 +84,9 @@ function addTodoItemDOM(todo) {
   todoItemDOM.appendChild(todoItemDescriptionDOM);
   todoItemDOM.appendChild(todoItemDuedateDOM);
   todoItemDOM.appendChild(todoItemPriorityDOM);
-  todoContainerDOM.appendChild(todoItemDOM);
+  todoWrapperDOM.appendChild(todoItemDOM);
+  todoWrapperDOM.appendChild(todoOverlayDOM);
+  todoContainerDOM.appendChild(todoWrapperDOM);
 }
 
 /**
@@ -143,6 +171,14 @@ function unfocusTodo(element) {
   }
 }
 document.addEventListener('click', unfocusTodo);
+
+/**
+ * Loads elements to add a todo
+ */
+function loadAddTodo() {
+  const addTodo = document.querySelector('.add__todo');
+}
+document.querySelector('.add__todo').addEventListener('click', loadAddTodo);
 
 export {
   addProjectDOM, addTodoItemDOM, removeTodoItemDOM,
