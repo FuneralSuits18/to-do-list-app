@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
 
+// ============================== PROJECTS ==============================
+
 /** Shows or hides projects when clicked on .projects.shown  */
 function toggleProjects() {
   const projects = document.querySelector('.hidden');
@@ -21,6 +23,7 @@ function hideProjects(element) {
 document.addEventListener('click', hideProjects);
 
 /**
+ * NOT DONE ================================
  * Adds a project DOM
  * @param {Project} project
  */
@@ -30,6 +33,30 @@ function addProjectDOM(project) {
   li.textContent = project.name;
   ul.appendChild(li);
 }
+
+// ============================== ADD TODO ==============================
+
+/**
+ * Shows the hidden project list in add-note
+ */
+function showHiddenProject() {
+  const hidden = document.querySelector('.hidden__project');
+  hidden.classList.toggle('show__projects');
+}
+const showProjects = document.querySelector('.shown__project');
+showProjects.addEventListener('click', showHiddenProject);
+
+/**
+ * Hide project list if clicked on anywhere but the list in add-note
+ * @param {node} element
+ */
+function hideProjectsAddNote(element) {
+  if (!element.target.matches('.shown__project')) {
+    const hidden = document.querySelector('.hidden__project');
+    hidden.classList.remove('show__projects');
+  }
+}
+document.addEventListener('click', hideProjectsAddNote);
 
 /**
  * Shows the hidden priorities
@@ -42,7 +69,7 @@ const showPriorities = document.querySelector('.shown__priority');
 showPriorities.addEventListener('click', showHiddenPriority);
 
 /**
- *
+ * Hide priority list if clicked on anywhere but the list
  * @param {node} element
  */
 function hidePriorities(element) {
@@ -52,6 +79,8 @@ function hidePriorities(element) {
   }
 }
 document.addEventListener('click', hidePriorities);
+
+// ============================== TODO LIST ==============================
 
 /**
  * Adds a todo DOM

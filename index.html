@@ -42,6 +42,7 @@
             <li><a href="">Project 1</a> </li>
             <li><a href="">Project 2</a> </li>
             <li><a href="">Project 3</a> </li>
+            <li><a href="">+New Project</a> </li>
           </ul>
         </div>
         
@@ -57,12 +58,28 @@
       <form action="" class="add__todo" method="post">
         <input name="title" class="title" type="text" placeholder="Title">
         <input name="description" class="description" type="text" placeholder="Write a note...">
+        <div class="set__project">
+          Project
+          <div class="projectbtn__container">
+            <div class="shown__project">None</div>
+            <div class="hidden__project">
+              <ul class="project__ul">
+                <li>None</li>
+                <li>Project 1</li>
+                <li>Project 2</li>
+                <li>Project 3</li>
+                <li>+New Project</li>
+              </ul>
+            </div>
+          </div>
+          
+        </div>
         <div class="set__priority">
           Priority:
           <div class="prioritybtn__container">
             <div class="shown__priority">None</div>
             <div class="hidden__priority">
-              <ul class="project__ul">
+              <ul class="priority__ul">
                 <li>None</li>
                 <li>1</li>
                 <li>2</li>
