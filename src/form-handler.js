@@ -1,4 +1,4 @@
-import Todo from "./todo";
+import Todo from './todo';
 
 /**
  *
@@ -7,9 +7,9 @@ import Todo from "./todo";
 function formHandler(element) {
   const title = element.title;
   const description = element.description;
-  const priority = element.
+  const priority = element.querySelector('.shown__priority').textContent;
 }
 
 
 const form = document.querySelectorAll('form');
-form.addEventListener('click', formHandler);
+form.addEventListener('change', formHandler);
