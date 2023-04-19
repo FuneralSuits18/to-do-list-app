@@ -3,6 +3,7 @@ import Project from './project';
 import {
   projectsDOM, addTodoItemDOM, removeTodoItemDOM,
 } from './dom';
+import {login} from './handleuser';
 
 const todo0 = new Todo('A new todo', 'desc', 6, 56);
 const todo1 = new Todo('2nd', 'desc', 9, 2);
