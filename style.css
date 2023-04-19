@@ -3,7 +3,7 @@
     --color-border: #6b5151;
     --color-white: #f2f2fe;
     --color-bg: #222121;
-    --color-bg-light: #3d3535;
+    --color-bg-light: #534b4b;
     --color-black: #000000;
 
     --transition: all 300ms ease;
@@ -45,10 +45,35 @@ body {
     display: flex;
     justify-content: center;
     padding-bottom: 1rem;
+    position: relative;
 }
 
 .header {
     font-family: 'Tilt Prism', cursive;
+}
+
+.signin {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    font-family: 'Roboto', sans-serif;
+    color: rgb(204, 204, 204);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding-right: 0.5rem;
+}
+
+.signin:hover {
+    background-color: var(--color-bg-light);
+}
+
+.signin img {
+    width: 2.5rem;
+    margin-right: 0.5rem;
+    border-radius: 0.8rem 0 0 0.8rem;
 }
 
 /* ============================================== PROJECTS ============================================== */
