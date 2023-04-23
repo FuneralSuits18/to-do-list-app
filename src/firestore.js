@@ -1,14 +1,17 @@
 /* eslint-disable max-len */
 import {app} from './firebase';
-import {getFirestore, collection, doc, setDoc, updateDoc, serverTimestamp} from 'firebase/firestore';
+import {getFirestore, collection, doc, addDoc, setDoc, serverTimestamp} from 'firebase/firestore';
 
 const db = getFirestore(app);
 
-const alovelaceDocumentRef = doc(db, 'users', 'alovelace');
-const usersCollectionRef = collection(db, 'users');
+// Example of references
+// const alovelaceDocumentRef = doc(db, 'users', 'alovelace');
+// const usersCollectionRef = collection(db, 'users');
 
+
+// if project/ priority is deleted, move notes to default and delete collection
 // Set a project
-await setDoc(doc(db, 'projects', 'pr0ject0'), {
+await setDoc(doc(db, 'projects', 'pr0ject1'), {
   // this project0 is a document
   // refer to notes
 }, {
@@ -16,21 +19,40 @@ await setDoc(doc(db, 'projects', 'pr0ject0'), {
 });
 
 // Set priorities
-await setDoc(doc(db, 'priorities', 1), {
+await setDoc(doc(db, 'priorities', '1'), {
   // refer to notes
 });
 
-// Add a new todo with a generated id. Call this later using todoRef.id
-const todoRef = await addDoc(collection(db, 'project0'), {
-  Title: Todo1,
-  description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti voluptatum nihil nobis unde quibusdam eveniet.',
-  priority: 1,
-}, {
-  merge: true,
-});
-// Update the timestamp field with the value from the server
-await updateDoc(todoRef, {
-  timestamp: serverTimestamp(),
-});
+/**
+ *
+ * @param {todo} todo
+ */
+async function addTodo(todo) {
+  // Add a new todo with a generated id. Call this later using todoRef.id
+  await addDoc(collection(db, 'project1'), {
+    title: todo.title,
+    description: todo.description,
+    priority: todo.priority,
+    duedate: todo.duedate,
+    timestamp: serverTimestamp(),
+  });
+}
+
+/**
+ *
+ * @param {todo} todo
+ * @param {string} todoId
+ */
+async function updateTodo(todo, todoId) {
+  // Add a new todo with a generated id. Call this later using todoRef.id
+  await setDoc(collection(db, 'project1', todoId), {
+    title: todo.title,
+    description: todo.description,
+    priority: todo.priority,
+    duedate: todo.duedate,
+    timestamp: serverTimestamp(),
+  });
+}
 
 
+export {addTodo, updateTodo};

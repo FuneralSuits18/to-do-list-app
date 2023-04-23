@@ -4,6 +4,7 @@ import {
   projectsDOM, addTodoItemDOM, removeTodoItemDOM,
 } from './dom';
 import {login} from './handleuser';
+import {todoRef} from './firestore';
 
 const todo0 = new Todo('A new todo', 'desc', 6, 56);
 const todo1 = new Todo('2nd', 'desc', 9, 2);
@@ -17,3 +18,5 @@ project0.addTodo(todo2);
 project0.todoList.forEach((element) => {
   addTodoItemDOM(element);
 });
+
+document.querySelector('.demo').addEventListener('click', demo);
