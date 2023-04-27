@@ -1,10 +1,11 @@
+/* eslint-disable max-len */
 import Todo from './todo';
 import Project from './project';
 import {
   projectsDOM, addTodoItemDOM, removeTodoItemDOM,
 } from './dom';
-import {login} from './handleuser';
-import {todoRef} from './firestore';
+import {login, uid} from './auth';
+import {addTodo, updateTodo} from './firestore';
 
 const todo0 = new Todo('A new todo', 'desc', 6, 56);
 const todo1 = new Todo('2nd', 'desc', 9, 2);
@@ -19,4 +20,6 @@ project0.todoList.forEach((element) => {
   addTodoItemDOM(element);
 });
 
-document.querySelector('.demo').addEventListener('click', demo);
+document.querySelector('.demo').addEventListener('click', () => updateTodo(todo2));
+
+

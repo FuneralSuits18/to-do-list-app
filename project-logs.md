@@ -1,5 +1,10 @@
 # Works
 
+## firestore
+
+- todos can be sorted by priority (then, timestamp) or duedate (then, timestamp)
+- path = users/duser/projects/dnotes
+
 ## index.js
 - Check for conditions to add todo without duedate/priority. Pass to addTodoItemDOM
 
