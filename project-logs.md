@@ -10,6 +10,7 @@
 
 ## html css
 - animation for loading/unloading todo
+- in dom.js, load todos from window, instead of the todo-container
 
 ## project.js
 - project should have an id. Use that id in html div

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import {app} from './firebase';
-import {getFirestore, collection, doc, addDoc, setDoc, serverTimestamp} from 'firebase/firestore';
+import {getFirestore, collection, doc, addDoc, setDoc, deleteDoc, getDocs, query, orderBy, serverTimestamp} from 'firebase/firestore';
 import {uid} from './auth';
 
 const db = getFirestore(app);
@@ -14,7 +14,7 @@ const db = getFirestore(app);
 
 /**
  *
- * @param {todo} todo
+ * @param {Todo} todo
  */
 async function addTodo(todo) {
   // Add a new todo with a generated id. Call this later using todoRef.id
@@ -34,8 +34,7 @@ async function addTodo(todo) {
 
 /**
  *
-9icWnJGVDyLKC0HHmKSB
- * @param {todo} todo
+ * @param {Todo} todo
  * @param {string} todoId
  */
 async function updateTodo(todo) { // add todoId param later
@@ -53,4 +52,32 @@ async function updateTodo(todo) { // add todoId param later
   }
 }
 
-export {addTodo, updateTodo};
+/**
+ *
+ * @param {todo} todo
+ * @param {string} todoId
+ */
+async function deleteTodo(todo) { // add todoId param later
+  try {
+    await deleteDoc(doc(db, 'users', uid, 'project40', '9icWnJGVDyLKC0HHmKSB'));
+    console.log('Todo deleted');
+  } catch (error) {
+    console.error('Todo NOT deleted', error);
+  }
+}
+
+/**
+ *
+ * @param {string} project
+ */
+async function getTodos(project) {
+  const todoList = [];
+  const q = query(collection(db, 'users', uid, project), orderBy('timestamp', 'desc'));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((todo) => {
+    todoList.push(todo.data());
+  });
+  return todoList;
+}
+
+export {addTodo, updateTodo, deleteTodo, getTodos};

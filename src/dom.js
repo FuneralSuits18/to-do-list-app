@@ -37,6 +37,14 @@ function addProjectDOM(project) {
 // ============================== ADD TODO ==============================
 
 /**
+ * Take values from add-todo and pass to Firestore
+ */
+function addTodoFB() {
+
+}
+document.querySelector('.btn').addEventListener('click', addTodoFB);
+
+/**
  * Shows the hidden project list in add-note
  */
 function showHiddenProject() {

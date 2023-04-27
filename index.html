@@ -15,9 +15,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
   <!-- Roboto Regular -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  
-  <!-- Iconscout CDN -->
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/7c2d594849.js" crossorigin="anonymous"></script>
 
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="style.css">
@@ -41,7 +41,7 @@
 
     <!-- =========================  Projects ========================= -->
     <div class="project__container">
-      <button class="project__button"><i class="uil uil-sliders-v-alt"></i></button>
+      <button class="project__button"><i class="fa-solid fa-list fa-sm" style="color: #b3b3b1;"></i></button>
       <div class="projects">
         <div class="shown">All</div>
         <div class="hidden">
@@ -64,7 +64,7 @@
       
       <form action="" class="add__todo" method="post">
         <input name="title" class="title" type="text" placeholder="Title">
-        <input name="description" class="description" type="text" placeholder="Write a note...">
+        <textarea name="description" class="description" cols="30" rows="1" style="overflow:hidden" placeholder="Write a note..."></textarea>
         <div class="set__project">
           Project
           <div class="projectbtn__container">
@@ -97,6 +97,8 @@
             </div>
           </div>
         </div>
+        <div class="btn">Add&#160<i class="fa-solid fa-check"></i></div>
+        
       </form>
     </div>
 

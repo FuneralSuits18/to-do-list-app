@@ -4,6 +4,9 @@ import {getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChange
 
 const auth = getAuth();
 
+
+let uid;
+let userRef;
 /** Login to Google */
 async function login() {
   const provider = new GoogleAuthProvider();
@@ -18,6 +21,7 @@ async function login() {
         // ...
         console.log(user);
         uid = user.uid;
+        userRef = user;
       }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -32,7 +36,7 @@ async function login() {
 }
 document.querySelector('.signin').addEventListener('click', login);
 
-let uid;
+
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
@@ -52,4 +56,4 @@ signOut(auth).then(() => {
   // An error happened.
 });
 
-export {login, uid};
+export {login, uid, userRef, auth};
