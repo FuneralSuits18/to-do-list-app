@@ -1,15 +1,36 @@
+/* eslint-disable max-len */
 import Todo from './todo';
+import {addTodo} from './firestore';
 
-/**
- *
- * @param {form} element
- */
-function formHandler(element) {
-  const title = element.title;
-  const description = element.description;
-  const priority = element.querySelector('.shown__priority').textContent;
-}
+// /**
+//  *
+//  * @param {form} element
+//  */
+// function formHandler(element) {
+//   const title = element.title;
+//   const description = element.description;
+//   const priority = element.querySelector('.shown__priority').textContent;
+// }
 
 
-const form = document.querySelectorAll('form');
-form.addEventListener('change', formHandler);
+// const form = document.querySelectorAll('form');
+// form.addEventListener('change', formHandler);
+
+const form = document.querySelector('.add__todo');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const title = document.getElementById('title');
+  const description = document.getElementById('description');
+  const duedate = document.getElementById('add__duedate');
+  const project = document.getElementById('shown__project');
+  const priority = document.getElementById('shown__priority');
+  console.log(title.value, description.value, duedate.value, project.value, priority.value);
+
+  if (project.value === 'Project') project.value = null;
+  if (priority.value === 'Priority') priority.value = null;
+
+  const todo = new Todo(title.value, description.value, duedate.value, priority.value, project.value);
+
+  addTodo(todo);
+});

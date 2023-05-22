@@ -7,4 +7,8 @@ module.exports = {
   experiments: {
     topLevelAwait: true,
   },
+  entry: ['./src/index.js', './src/form-handler.js'],
+  output: {
+    path: path.join(__dirname, 'public'),
+  }
 };

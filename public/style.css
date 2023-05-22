@@ -149,8 +149,9 @@ body {
     border-radius: 0.5rem;
     background-color: var(--color-bg);
     margin-top: 2rem;
-    max-width: 30rem;
-    min-width: 30rem;
+    width: 40rem;
+    /* max-width: 40rem;
+    min-width: 30rem; */
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.274);
 }
 
@@ -175,6 +176,10 @@ textarea.description {
     margin-bottom: 1rem;
 }
 
+textarea {
+    resize: vertical;
+  }
+
 .set__priority {
     display: flex;
     flex-direction: row;
@@ -183,9 +188,46 @@ textarea.description {
     margin-bottom: 0.5rem;
 }
 
+.add__duedate__container {
+    position: absolute;
+    bottom: 4%;
+    left: 35%;
+    display: flex;
+    align-items: center;
+    font-size: small;
+}
+
+.add__duedate {
+    width: 140px;
+    padding: 5px;
+    height: 24px;
+    display: block;
+    background-color: var(--color-bg);
+    color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 0.4rem;
+}
+
+::-webkit-calendar-picker-indicator {
+    margin-left: 0.35em;
+    filter: invert(48%) sepia(30%) saturate(0%) hue-rotate(203deg) brightness(90%) contrast(95%);
+    cursor: pointer;
+}
+::-webkit-calendar-picker-indicator:hover {
+    filter: invert(60%) sepia(100%) saturate(1854%) hue-rotate(3deg) brightness(107%) contrast(106%);
+}
+
+::-webkit-datetime-edit-text { color: var(--color-white); padding: 0 0.3em; }
+::-webkit-datetime-edit-month-field { color: var(--color-white); }
+::-webkit-datetime-edit-day-field { color: var(--color-white); }
+::-webkit-datetime-edit-year-field { color: var(--color-white); }
+
 .shown__priority{
     border: 1px solid var(--color-border);
     border-radius: 0.3rem;
+    background-color: var(--color-bg);
+    color: var(--color-white);
+    font: inherit;
     margin-left: 0.3rem;
     padding: 0rem 0.3rem;
     cursor: pointer;
@@ -203,7 +245,6 @@ textarea.description {
     opacity: 0;
     transition: var(--transition);
     z-index: 3;
-    padding: 0 0.3rem;
 }
 
 .show__priorities {
@@ -211,14 +252,23 @@ textarea.description {
     opacity: 1;
 }
 
-.hidden__priority li:hover {
+.hidden__priority__item {
+    width: 100%;
+    background-color: var(--color-bg);
+    color: var(--color-white);
+    font: inherit;
+    padding: 0 0.3rem;
+    cursor: pointer;
+}
+
+.hidden__priority__item:hover {
     background-color: var(--color-bg-light);
     cursor: pointer;
 }
 
 .set__project {
     position: absolute;
-    left: 30%;
+    left: 15%;
     bottom: 0%;
     display: flex;
     flex-direction: row;
@@ -230,6 +280,9 @@ textarea.description {
 .shown__project {
     border: 1px solid var(--color-border);
     border-radius: 0.3rem;
+    background-color: var(--color-bg);
+    color: var(--color-white);
+    font: inherit;
     margin-left: 0.3rem;
     padding: 0rem 0.3rem;
     cursor: pointer;
@@ -247,17 +300,25 @@ textarea.description {
     opacity: 0;
     transition: var(--transition);
     z-index: 3;
+}
+
+.hidden__project__item {
+    width: 100%;
+    background-color: var(--color-bg);
+    color: var(--color-white);
+    font: inherit;
     padding: 0 0.3rem;
+    cursor: pointer;
+}
+
+.hidden__project__item:hover {
+    background-color: var(--color-bg-light);
+    cursor: pointer;
 }
 
 .show__projects {
     visibility: visible;
     opacity: 1;
-}
-
-.hidden__project li:hover {
-    background-color: var(--color-bg-light);
-    cursor: pointer;
 }
 
 .btn {
@@ -274,7 +335,6 @@ textarea.description {
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.253);
     cursor: pointer;
     transition: var(--transition);
-    
 }
 
 .btn:hover {

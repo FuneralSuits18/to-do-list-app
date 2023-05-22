@@ -20,10 +20,10 @@
   <script src="https://kit.fontawesome.com/7c2d594849.js" crossorigin="anonymous"></script>
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="public/style.css">
 
   <!-- JavaScript -->
-  <script src="dist/main.js" defer></script>
+  <script src="/public/main.js" defer></script>
 
   
 </head>
@@ -58,47 +58,48 @@
 
     <!-- =========================  Add Todo ========================= -->
     <div class="add__todo__container">
-      <!-- <form action="" class="add__todo">
-        <input class="title" type="text" placeholder="Write a note...">
-      </form> -->
-      
-      <form action="" class="add__todo" method="post">
-        <input name="title" class="title" type="text" placeholder="Title">
-        <textarea name="description" class="description" cols="30" rows="1" style="overflow:hidden" placeholder="Write a note..."></textarea>
+      <form action="./server.js" class="add__todo" method="post">
+        <input name="title" id="title" class="title" type="text" placeholder="Title">
+
+        <textarea name="description" id="description" class="description" cols="30" rows="1" style="overflow:hidden" placeholder="Write a note..."></textarea>
+
+        <div class="add__duedate__container">
+          <label for="add__duedate">Duedate:</label>
+          <input type="date" id="add__duedate" name="duedate" class="add__duedate">
+        </div>
+
         <div class="set__project">
-          Project
           <div class="projectbtn__container">
-            <div class="shown__project">None</div>
+            <input type="button" name="project-selected" value="Project" id="shown__project" class="shown__project">
             <div class="hidden__project">
               <ul class="project__ul">
-                <li>None</li>
-                <li>Project 1</li>
-                <li>Project 2</li>
-                <li>Project 3</li>
-                <li>+New Project</li>
+                <li><input type="button" name="project-none" value="None" class="hidden__project__item"></li>
+                <li><input type="button" name="project-1" value="Project 1" class="hidden__project__item"></li>
+                <li><input type="button" name="project-2" value="Project 2" class="hidden__project__item"></li>
+                <li><input type="button" name="project-3" value="Project 3" class="hidden__project__item"></li>
+                <li><input type="button" name="project-new" value="+New Project" class="hidden__project__item"></li>
               </ul>
             </div>
           </div>
-          
         </div>
+
         <div class="set__priority">
-          Priority:
           <div class="prioritybtn__container">
-            <div class="shown__priority">None</div>
+            <input type="button" value="Priority" name="priority-selected" id="shown__priority" class="shown__priority">
             <div class="hidden__priority">
               <ul class="priority__ul">
-                <li>None</li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>Maximum</li>
+                <li><input type="button" name="priority-none" value="None" class="hidden__priority__item"></li>
+                <li><input type="button" name="priority-1" value="1" class="hidden__priority__item"></li>
+                <li><input type="button" name="priority-2" value="2" class="hidden__priority__item"></li>
+                <li><input type="button" name="priority-3" value="3" class="hidden__priority__item"></li>
+                <li><input type="button" name="priority-4" value="4" class="hidden__priority__item"></li>
+                <li><input type="button" name="priority-max" value="Maximum" class="hidden__priority__item"></li>
               </ul>
             </div>
           </div>
         </div>
-        <div class="btn">Add&#160<i class="fa-solid fa-check"></i></div>
-        
+
+        <button type="submit" class="btn">Add&#160<i class="fa-solid fa-check"></i></button>
       </form>
     </div>
 
