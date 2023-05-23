@@ -59,43 +59,38 @@
     <!-- =========================  Add Todo ========================= -->
     <div class="add__todo__container">
       <form action="./server.js" class="add__todo" method="post">
-        <input name="title" id="title" class="title" type="text" placeholder="Title">
+        <input name="title" class="title" type="text" placeholder="Title">
 
-        <textarea name="description" id="description" class="description" cols="30" rows="1" style="overflow:hidden" placeholder="Write a note..."></textarea>
+        <textarea name="description" class="description" cols="30" rows="1" style="overflow:hidden" placeholder="Write a note..."></textarea>
 
         <div class="add__duedate__container">
           <label for="add__duedate">Duedate:</label>
-          <input type="date" id="add__duedate" name="duedate" class="add__duedate">
+          <input type="date" name="duedate" class="add__duedate">
         </div>
 
-        <div class="set__project">
-          <div class="projectbtn__container">
-            <input type="button" name="project-selected" value="Project" id="shown__project" class="shown__project">
-            <div class="hidden__project">
-              <ul class="project__ul">
-                <li><input type="button" name="project-none" value="None" class="hidden__project__item"></li>
-                <li><input type="button" name="project-1" value="Project 1" class="hidden__project__item"></li>
-                <li><input type="button" name="project-2" value="Project 2" class="hidden__project__item"></li>
-                <li><input type="button" name="project-3" value="Project 3" class="hidden__project__item"></li>
-                <li><input type="button" name="project-new" value="+New Project" class="hidden__project__item"></li>
-              </ul>
-            </div>
+        <div class="select__container select__project">
+          <div class="select">
+            <select name="project" id="project">
+               <option selected disabled>Project</option>
+               <option value="pdf">Project 1</option>
+               <option value="txt">Project 2</option>
+               <option value="epub">Project 3</option>
+               <option value="fb2">fb2</option>
+               <option value="mobi">mobi</option>
+            </select>
           </div>
         </div>
-
-        <div class="set__priority">
-          <div class="prioritybtn__container">
-            <input type="button" value="Priority" name="priority-selected" id="shown__priority" class="shown__priority">
-            <div class="hidden__priority">
-              <ul class="priority__ul">
-                <li><input type="button" name="priority-none" value="None" class="hidden__priority__item"></li>
-                <li><input type="button" name="priority-1" value="1" class="hidden__priority__item"></li>
-                <li><input type="button" name="priority-2" value="2" class="hidden__priority__item"></li>
-                <li><input type="button" name="priority-3" value="3" class="hidden__priority__item"></li>
-                <li><input type="button" name="priority-4" value="4" class="hidden__priority__item"></li>
-                <li><input type="button" name="priority-max" value="Maximum" class="hidden__priority__item"></li>
-              </ul>
-            </div>
+        
+        <div class="select__container">
+          <div class="select">
+            <select name="priority" id="priority">
+              <option selected disabled>Priority</option>
+              <option value="pdf">PDF</option>
+              <option value="txt">txt</option>
+              <option value="epub">ePub</option>
+              <option value="fb2">fb2</option>
+              <option value="mobi">mobi</option>
+            </select>
           </div>
         </div>
 

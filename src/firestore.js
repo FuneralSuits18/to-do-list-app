@@ -22,8 +22,9 @@ async function addTodo(todo) {
     await addDoc(collection(db, 'users', uid, 'project40'), {
       title: todo.title,
       description: todo.description,
-      priority: todo.priority,
       duedate: todo.duedate,
+      priority: todo.priority,
+      project: todo.project,
       timestamp: serverTimestamp(),
     });
     console.log('Todo added to database');
@@ -42,8 +43,9 @@ async function updateTodo(todo) { // add todoId param later
     await setDoc(doc(db, 'users', uid, 'project40', '9icWnJGVDyLKC0HHmKSB'), {
       title: todo.title,
       description: todo.description,
-      priority: todo.priority,
       duedate: todo.duedate,
+      priority: todo.priority,
+      project: todo.project,
       timestamp: serverTimestamp(),
     });
     console.log('Todo updated');
