@@ -6,7 +6,7 @@
     --color-bg-light: #534b4b;
     --color-black: #000000;
 
-    --transition: all 300ms ease;
+    --transition: all 200ms ease;
 }
 
 /* ============================================== GENERAL ============================================== */
@@ -64,81 +64,21 @@ body {
     align-items: center;
     cursor: pointer;
     padding-right: 0.5rem;
+    transition: var(--transition);
 }
 
 .signin:hover {
     background-color: var(--color-bg-light);
 }
 
+.signin:active {
+    background-color: var(--color-primary);
+}
+
 .signin img {
     width: 2.5rem;
     margin-right: 0.5rem;
     border-radius: 0.8rem 0 0 0.8rem;
-}
-
-/* ============================================== PROJECTS ============================================== */
-
-.project__container {
-    width: 75%;
-    margin: 2rem 2rem 2rem 0;
-    display: flex;
-    justify-content: center;
-}
-
-.project__button {
-    background-color: var(--color-bg);
-    color: #b8b1b1;
-    font-size: 2rem;
-    cursor: pointer;
-}
-
-.projects {
-    font-family: inherit;
-    font-weight: 400;
-}
-
-.shown {
-    border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
-    margin-left: 1rem;
-    padding: 0.5rem;
-    cursor: pointer;
-    /* transition: var(--transition); */
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.274);
-}
-
-.hidden {
-    position: fixed;
-    border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
-    margin-left: 1rem;
-    background-color: var(--color-bg);
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.377);
-    visibility: hidden;
-    opacity: 0;
-    transition: var(--transition);
-    z-index: 1;
-}
-
-.show__projects {
-    visibility: visible;
-    opacity: 1;
-}
-
-.hidden li {
-    padding: 0.3rem 0.7rem 0 0.7rem; 
-}
-
-.hidden li:last-child {
-    padding-bottom: 0.3rem;
-}
-
-.hidden li:hover {
-    background-color: var(--color-bg-light);
-}
-
-.projects a {
-    color: var(--color-white);
 }
 
 /* ============================================== ADD TODO ============================================== */
@@ -407,11 +347,84 @@ select:hover {
     background-color: var(--color-bg-light);
 }
 
+.btn:active {
+    background-color: var(--color-primary);
+}
+
+/* ============================================== PROJECTS ============================================== */
+
+.project__container {
+    width: 75%;
+    margin: 3rem 2rem 0.5rem 1rem;
+    display: flex;
+    justify-content: left;
+}
+
+.project__button {
+    background-color: var(--color-bg);
+    color: #b8b1b1;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.projects__label {
+    padding: 0.1rem 0 0.1rem 0.5rem;
+}
+
+.projects {
+    font-family: inherit;
+    font-weight: 400;
+}
+
+.shown {
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.5rem;
+    cursor: pointer;
+    /* transition: var(--transition); */
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.274);
+}
+
+.hidden {
+    position: fixed;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    margin-left: 1rem;
+    background-color: var(--color-bg);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.377);
+    visibility: hidden;
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 10;
+}
+
+.show__projects {
+    visibility: visible;
+    opacity: 1;
+}
+
+.hidden li {
+    padding: 0.3rem 0.7rem 0 0.7rem; 
+}
+
+.hidden li:last-child {
+    padding-bottom: 0.3rem;
+}
+
+.hidden li:hover {
+    background-color: var(--color-bg-light);
+}
+
+.projects li {
+    color: var(--color-white);
+    cursor: pointer;
+}
+
 /* ============================================== TODO LIST ============================================== */
 
 .todo__container {
-    padding-top: 1rem;
-    margin: 1rem;
+    margin: 0 1rem 1rem 1rem;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
