@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import Todo from './todo';
-// import {addTodo} from './firestore';
+import {addTodo} from './firestore';
 
 // /**
 //  *
@@ -35,10 +35,11 @@ import Todo from './todo';
 //   addTodo(todo);
 // });
 
-document.querySelector('form').addEventListener('submit', (e) => {
+document.forms.namedItem('add-todo__formdata').addEventListener('submit', (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
 
-  const todo = new Todo(formData.get('title'), formData.get('description'), formData.get('duedate'), formData.get('priority-selected'), formData.get('project-selected'));
-  console.log(todo);
+  const todo = new Todo(formData.get('title'), formData.get('description'), formData.get('duedate'), formData.get('priority'), formData.get('project'));
+  if (todo.project == null) todo.project = 'none';
+  addTodo(todo);
 });
