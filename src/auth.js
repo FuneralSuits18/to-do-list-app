@@ -19,7 +19,6 @@ async function login() {
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         // ...
-        console.log(user);
         uid = user.uid;
         userRef = user;
       }).catch((error) => {
@@ -35,6 +34,23 @@ async function login() {
       });
 }
 document.querySelector('.signin').addEventListener('click', login);
+
+// /**
+//  * Login using Google provided button
+//  * @param {object} response
+//  */
+// function handleCredentialResponse(response) {
+//   // decodeJwtResponse() is a custom function defined by you
+//   // to decode the credential response.
+//   const responsePayload = decodeJwtResponse(response.credential);
+
+//   console.log('ID: ' + responsePayload.sub);
+//   console.log('Full Name: ' + responsePayload.name);
+//   console.log('Given Name: ' + responsePayload.given_name);
+//   console.log('Family Name: ' + responsePayload.family_name);
+//   console.log('Image URL: ' + responsePayload.picture);
+//   console.log('Email: ' + responsePayload.email);
+// }
 
 
 onAuthStateChanged(auth, (user) => {
