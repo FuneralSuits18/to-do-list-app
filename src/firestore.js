@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import {app} from './firebase';
-import {getFirestore, collection, doc, addDoc, setDoc, deleteDoc, getDocs, query, orderBy, serverTimestamp} from 'firebase/firestore';
+import {getFirestore, collection, doc, addDoc, setDoc, deleteDoc, getDocs, getDoc, query, orderBy, serverTimestamp, where} from 'firebase/firestore';
 import {uid} from './auth';
 
 const db = getFirestore(app);
@@ -19,7 +19,7 @@ const db = getFirestore(app);
 async function addTodo(todo) {
   // Add a new todo with a generated id. Call this later using todoRef.id
   try {
-    await addDoc(collection(db, 'users', uid, 'project40'), {
+    await addDoc(collection(db, 'users', uid, 'projects'), {
       title: todo.title,
       description: todo.description,
       duedate: todo.duedate,
@@ -38,9 +38,9 @@ async function addTodo(todo) {
  * @param {Todo} todo
  * @param {string} todoId
  */
-async function updateTodo(todo) { // add todoId param later
+async function updateTodo(todo, todoId) {
   try {
-    await setDoc(doc(db, 'users', uid, 'project40', '9icWnJGVDyLKC0HHmKSB'), {
+    await setDoc(doc(db, 'users', uid, 'projects', todoId), {
       title: todo.title,
       description: todo.description,
       duedate: todo.duedate,
@@ -56,12 +56,11 @@ async function updateTodo(todo) { // add todoId param later
 
 /**
  *
- * @param {todo} todo
  * @param {string} todoId
  */
-async function deleteTodo(todo) { // add todoId param later
+async function deleteTodo(todoId) { // add todoId param later
   try {
-    await deleteDoc(doc(db, 'users', uid, 'project40', '9icWnJGVDyLKC0HHmKSB'));
+    await deleteDoc(doc(db, 'users', uid, 'projects', todoId));
     console.log('Todo deleted');
   } catch (error) {
     console.error('Todo NOT deleted', error);
@@ -74,12 +73,37 @@ async function deleteTodo(todo) { // add todoId param later
  */
 async function getTodos(project) {
   const todoList = [];
-  const q = query(collection(db, 'users', uid, project), orderBy('timestamp', 'desc'));
-  const querySnapshot = await getDocs(q);
+  let q;
+  let querySnapshot;
+  if (project === 'all') {
+    q = query(collection(db, 'users', uid, 'projects'), orderBy('timestamp', 'desc'));
+    querySnapshot = await getDocs(q);
+  } else {
+    q = query(collection(db, 'users', uid, 'projects'), where('project', '==', project), orderBy('timestamp', 'desc'));
+    querySnapshot = await getDocs(q);
+  }
   querySnapshot.forEach((todo) => {
-    todoList.push(todo.data());
+    todoList.push({id: todo.id, data: todo.data()});
   });
   return todoList;
 }
 
-export {addTodo, updateTodo, deleteTodo, getTodos};
+/**
+ * Test function
+ */
+async function random() {
+  try {
+    console.log('in random: ', uid);
+    const docRef = doc(db, 'users', uid);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log('users data: ', docSnap.data());
+    } else {
+      console.log('doc not found in "random"');
+    }
+  } catch (e) {
+    console.log('error: ', e);
+  }
+}
+
+export {addTodo, updateTodo, deleteTodo, getTodos, random};

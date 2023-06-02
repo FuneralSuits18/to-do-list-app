@@ -25,10 +25,9 @@ import {onAuthStateChanged} from 'firebase/auth';
 onAuthStateChanged(auth, (userRef) => {
   if (userRef) {
     console.log('logged in!!');
-    getTodos('project40').then((todoList) => {
-      console.log('aaaaaaaaaaaaaaaaaa', todoList);
+    getTodos('all').then((todoList) => {
       todoList.forEach((todo) => {
-        addTodoItemDOM(todo);
+        addTodoItemDOM(todo.data);
       });
     });
   } else {
