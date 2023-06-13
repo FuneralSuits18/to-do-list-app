@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import {getTodos} from './firestore';
 
 // ============================== ADD TODO ==============================
 
@@ -87,15 +88,44 @@ function selectProject(element) {
   shownProject.classList.add(selectedProject.className);
   selectedProject.className = placeHolder;
 }
-const projectUl = document.querySelector('.project__ul');
-for (const li of projectUl.children) {
-  li.addEventListener('click', selectProject);
+
+/**
+ * Load selectProject function after loadProjects function loads
+ */
+async function loadSelectProjects() {
+  await loadProjects();
+  const projectUl = document.querySelector('.project__ul');
+  for (const li of projectUl.children) {
+    li.addEventListener('click', selectProject);
+  }
+}
+
+
+/**
+ * Get all the project names
+ */
+async function loadProjects() {
+  const ul = document.querySelector('.project__ul');
+
+  const projects = [];
+  await getTodos('all').then((todoList) => {
+    todoList.forEach((todo) => {
+      if (projects.includes(todo.data.project)) ;
+      else {
+        projects.push(todo.data.project);
+        const newLi = document.createElement('li');
+        newLi.textContent = todo.data.project;
+        newLi.classList.add(todo.data.project.split(' ').join('_'));
+        ul.appendChild(newLi);
+      }
+    });
+  });
 }
 
 /**
  * NOT DONE ================================
  * Adds a project DOM
- * @param {Project} project
+ * @param {string} project
  */
 function addProjectDOM(project) {
   const ul = document.querySelector('.project__ul');
@@ -107,7 +137,7 @@ function addProjectDOM(project) {
 // ============================== TODO LIST ==============================
 
 /**
- * Adds a todo DOM
+ * Adds a todo DOM (implemented in 'firestore.js')
  * @param {Todo} todo
  */
 function addTodoItemDOM(todo) {
@@ -130,8 +160,15 @@ function addTodoItemDOM(todo) {
 
   todoItemTitleDOM.textContent = todo.title;
   todoItemDescriptionDOM.textContent = todo.description;
-  todoItemDuedateDOM.textContent = todo.duedate;
-  todoItemPriorityDOM.textContent = todo.priority;
+  if (!todo.duedate) ;
+  else {
+    todoItemDuedateDOM.textContent ='Duedate: ' + todo.duedate;
+  }
+
+  if (todo.priority === null) ;
+  else {
+    todoItemPriorityDOM.textContent = 'Priority: ' + todo.priority;
+  }
 
   todoItemDOM.appendChild(todoItemTitleDOM);
   todoItemDOM.appendChild(todoItemDescriptionDOM);
@@ -234,5 +271,5 @@ function loadAddTodo() {
 document.querySelector('.add__todo').addEventListener('click', loadAddTodo);
 
 export {
-  addProjectDOM, addTodoItemDOM, removeTodoItemDOM,
+  addProjectDOM, addTodoItemDOM, removeTodoItemDOM, loadSelectProjects,
 };
