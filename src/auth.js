@@ -4,7 +4,6 @@ import {getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChange
 
 const auth = getAuth();
 
-
 let uid;
 let userRef;
 /** Login to Google */
@@ -35,24 +34,6 @@ async function login() {
 }
 document.querySelector('.signin').addEventListener('click', login);
 
-// /**
-//  * Login using Google provided button
-//  * @param {object} response
-//  */
-// function handleCredentialResponse(response) {
-//   // decodeJwtResponse() is a custom function defined by you
-//   // to decode the credential response.
-//   const responsePayload = decodeJwtResponse(response.credential);
-
-//   console.log('ID: ' + responsePayload.sub);
-//   console.log('Full Name: ' + responsePayload.name);
-//   console.log('Given Name: ' + responsePayload.given_name);
-//   console.log('Family Name: ' + responsePayload.family_name);
-//   console.log('Image URL: ' + responsePayload.picture);
-//   console.log('Email: ' + responsePayload.email);
-// }
-
-
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
@@ -71,5 +52,52 @@ signOut(auth).then(() => {
 }).catch((error) => {
   // An error happened.
 });
+
+// =====================================================================
+
+import firebase from 'firebase/compat/app';
+import * as firebaseui from 'firebaseui';
+
+// Initialize the FirebaseUI Widget using Firebase.
+const ui = new firebaseui.auth.AuthUI(auth);
+
+ui.start('#firebaseui-auth-container', {
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  ],
+  // Other config options...
+});
+
+const uiConfig = {
+  callbacks: {
+    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+      // User successfully signed in.
+      // Return type determines whether we continue the redirect automatically
+      // or whether we leave that to developer to handle.
+      return true;
+    },
+    uiShown: function() {
+      // The widget is rendered.
+      // Hide the loader.
+      document.getElementById('loader').style.display = 'none';
+    },
+  },
+  // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+  signInFlow: 'popup',
+  signInSuccessUrl: '<url-to-redirect-to-on-success>',
+  signInOptions: [
+    // Leave the lines as is for the providers you want to offer your users.
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  ],
+  // Terms of service url.
+  tosUrl: '<your-tos-url>',
+  // Privacy policy url.
+  privacyPolicyUrl: '<your-privacy-policy-url>',
+};
+
+// The start method will wait until the DOM is loaded.
+ui.start('#firebaseui-auth-container', uiConfig);
+
+// =====================================================================
 
 export {login, uid, userRef, auth};

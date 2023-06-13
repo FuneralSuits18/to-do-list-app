@@ -12,10 +12,6 @@
 - animation for loading/unloading todo
 - in dom.js, load todos from window, instead of the todo-container
 
-## project.js
-- project should have an id. Use that id in html div
-- how to add id automatically for every obj like database?
-
 <br>
 
 # Ideas
@@ -28,3 +24,7 @@
   
 ## Todo list
 - if there's no text in a todo, it is removed from the list.
+
+## dom.js
+
+- in "Projects", first node is "All", and last node is "None". Exclude "none" when making li nodes in loadProjects function. Add those projects last after creating "None" node.

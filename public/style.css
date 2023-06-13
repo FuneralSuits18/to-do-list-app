@@ -486,6 +486,12 @@ select:hover {
 
 .duedate {
     margin: 0.5rem 0;
+    font-size: small;
+    font-weight: 400;
+}
+
+.priority {
+    font-size: small;
     font-weight: 400;
 }
 
