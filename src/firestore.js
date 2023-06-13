@@ -1,14 +1,15 @@
 /* eslint-disable max-len */
+
 import {app} from './firebase';
-import {getFirestore, collection, doc, addDoc, setDoc, deleteDoc, getDocs, getDoc, query, orderBy, serverTimestamp, where} from 'firebase/firestore';
+import {getFirestore, collection, doc, addDoc, setDoc, deleteDoc, getDocs, query, orderBy, serverTimestamp, where} from 'firebase/firestore';
 import {uid} from './auth';
+import {addTodoItemDOM} from './dom';
 
 const db = getFirestore(app);
 
 // Example of references
 // const alovelaceDocumentRef = doc(db, 'users', 'alovelace');
 // const usersCollectionRef = collection(db, 'users');
-
 
 // if project/ priority is deleted, move notes to default and delete collection
 
@@ -28,6 +29,7 @@ async function addTodo(todo) {
       timestamp: serverTimestamp(),
     });
     console.log('Todo added to database');
+    addTodoItemDOM(todo);
   } catch (error) {
     console.error('Todo NOT added to database', error);
   }
@@ -76,10 +78,10 @@ async function getTodos(project) {
   let q;
   let querySnapshot;
   if (project === 'all') {
-    q = query(collection(db, 'users', uid, 'projects'), orderBy('timestamp', 'desc'));
+    q = query(collection(db, 'users', uid, 'projects'), orderBy('priority', 'desc'), orderBy('timestamp', 'desc'));
     querySnapshot = await getDocs(q);
   } else {
-    q = query(collection(db, 'users', uid, 'projects'), where('project', '==', project), orderBy('timestamp', 'desc'));
+    q = query(collection(db, 'users', uid, 'projects'), where('project', '==', project), orderBy('priority', 'desc'), orderBy('timestamp', 'desc'));
     querySnapshot = await getDocs(q);
   }
   querySnapshot.forEach((todo) => {
@@ -88,22 +90,4 @@ async function getTodos(project) {
   return todoList;
 }
 
-/**
- * Test function
- */
-async function random() {
-  try {
-    console.log('in random: ', uid);
-    const docRef = doc(db, 'users', uid);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      console.log('users data: ', docSnap.data());
-    } else {
-      console.log('doc not found in "random"');
-    }
-  } catch (e) {
-    console.log('error: ', e);
-  }
-}
-
-export {addTodo, updateTodo, deleteTodo, getTodos, random};
+export {addTodo, updateTodo, deleteTodo, getTodos};

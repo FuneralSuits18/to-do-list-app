@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import Todo from './todo';
 import {addTodo} from './firestore';
+import {addTodoItemDOM} from './dom';
 
 // /**
 //  *
@@ -41,5 +42,6 @@ document.forms.namedItem('add-todo__formdata').addEventListener('submit', (e) =>
 
   const todo = new Todo(formData.get('title'), formData.get('description'), formData.get('duedate'), formData.get('priority'), formData.get('project'));
   if (todo.project == null) todo.project = 'none';
+
   addTodo(todo);
 });
