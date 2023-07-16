@@ -105,6 +105,7 @@ async function loadSelectProjects() {
  * Get all the project names
  */
 async function loadProjects() {
+  unloadProjects();
   const ul = document.querySelector('.project__ul');
 
   const projects = [];
@@ -123,15 +124,13 @@ async function loadProjects() {
 }
 
 /**
- * NOT DONE ================================
- * Adds a project DOM
- * @param {string} project
+ * Remove all the project names from list
  */
-function addProjectDOM(project) {
-  const ul = document.querySelector('.project__ul');
-  const li = document.createElement('li');
-  li.textContent = project.name;
-  ul.appendChild(li);
+function unloadProjects() {
+  const projectUl = document.querySelector('.project__ul');
+  for (const li of projectUl.children) {
+    li.remove();
+  }
 }
 
 // ============================== TODO LIST ==============================
@@ -148,6 +147,7 @@ function addTodoItemDOM(todo) {
   const todoItemDescriptionDOM = document.createElement('div');
   const todoItemDuedateDOM = document.createElement('div');
   const todoItemPriorityDOM = document.createElement('div');
+  const todoItemProjectDOM = document.createElement('div');
   const todoOverlayDOM = document.createElement('div');
 
   todoItemDOM.classList.add('todo');
@@ -156,7 +156,10 @@ function addTodoItemDOM(todo) {
   todoItemDescriptionDOM.classList.add('todo__description');
   todoItemDuedateDOM.classList.add('duedate');
   todoItemPriorityDOM.classList.add('priority');
+  todoItemProjectDOM.classList.add('project');
   todoOverlayDOM.classList.add('todo__overlay');
+
+  todoItemProjectDOM.hidden = true;
 
   todoItemTitleDOM.textContent = todo.title;
   todoItemDescriptionDOM.textContent = todo.description;
@@ -169,6 +172,8 @@ function addTodoItemDOM(todo) {
   else {
     todoItemPriorityDOM.textContent = 'Priority: ' + todo.priority;
   }
+
+  todoItemProjectDOM.textContent = 'Project: ' + todo.project;
 
   todoItemDOM.appendChild(todoItemTitleDOM);
   todoItemDOM.appendChild(todoItemDescriptionDOM);
@@ -193,6 +198,16 @@ function removeTodoItemDOM(todo) {
 }
 
 /**
+ * Remove all todo items from html page
+ */
+function removeAllTodoItemsDOM() {
+  const todos = document.querySelectorAll('.todo__wrapper');
+  todos.forEach((todo) => {
+    todo.remove();
+  });
+}
+
+/**
  * Loads a todo to focus
  * @param {node} element
  */
@@ -200,54 +215,127 @@ function loadTodo(element) {
   if (element.target.classList.contains('todo__overlay')) {
     element.target.classList.add('todo__overlay__loaded');
 
-    // Remove animation class from todos
+    // Remove animation class('.todo__wrapper') from todos
     const todoWrapper = document.querySelectorAll('.todo__wrapper');
     todoWrapper.forEach((div) => {
       div.classList.remove('todo__wrapper__animation');
     });
 
-    // Get todo info text
+    const editFormContainer = document.createElement('div');
+    editFormContainer.classList.add('edit__form');
+    editFormContainer.innerHTML = `<form enctype="multipart/form-data" class="add__todo" method="post" name="add-todo__formdata">
+    <input name="title" class="title" type="text" placeholder="Title">
+
+    <textarea name="description" class="description" cols="30" rows="1" style="overflow:hidden" placeholder="Write a note..."></textarea>
+
+    <div class="add__duedate__container">
+      <label for="add__duedate">Duedate:</label>
+      <input type="date" name="duedate" class="add__duedate">
+    </div>
+
+    <div class="select__container select__project">
+      <div class="select">
+        <select name="project" id="project">
+           <option selected disabled>Project</option>
+           <option value="none">None</option>
+           <option value="Project 1">Project 1</option>
+           <option value="Project 2">Project 2</option>
+           <option value="Project 3">Project 3</option>
+           <option value="fb2">+ New</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="select__container">
+      <div class="select">
+        <select name="priority" id="priority">
+          <option selected disabled>Priority</option>
+          <option value="none">None</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="add">+ Add</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="btn">Edit&#160<i class="fa-solid fa-check"></i></button>
+    </form>`;
+
+    // an underlay for the 'edit todo' to make everything else in the page unclickable
+    const underlay = document.createElement('div');
+    underlay.classList.add('underlay');
+
+
     const todo = element.target.previousElementSibling;
-    const todoTitle = todo.querySelector('.todo__title').textContent;
-    const todoDescription = todo.querySelector('.todo__description').textContent;
-    const todoDuedate = todo.querySelector('.duedate') ? todo.querySelector('.duedate').textContent : 0;
-    const todoPriority = todo.querySelector('.priority') ? todo.querySelector('.priority').textContent : 0;
+    // Add editFormContainer to .todo__container
+    todo.parentNode.parentNode.prepend(editFormContainer);
+    // Add underlay to .container
+    todo.parentNode.parentNode.parentNode.append(underlay);
 
-    // Create todo's divs
-    const todoLoaded = document.createElement('div');
-    const todoLoadedTitle = document.createElement('div');
-    const todoLoadedDescription = document.createElement('div');
-    const todoLoadedDuedate = document.createElement('div');
-    const todoLoadedPriority = document.createElement('div');
+    // // Get todo info text
+    // const todo = element.target.previousElementSibling;
+    // const todoTitle = todo.querySelector('.todo__title').textContent;
+    // const todoDescription = todo.querySelector('.todo__description').textContent;
+    // const todoDuedate = todo.querySelector('.duedate') ? todo.querySelector('.duedate').textContent : 0;
+    // const todoPriority = todo.querySelector('.priority') ? todo.querySelector('.priority').textContent : 0;
+    // const todoProject = todo.querySelector('.project').textContent; // this is not loaded into DOM. Used for editing todos.
+    // ====================================================
+    //   // Create todo's divs
+    //   const todoLoaded = document.createElement('div');
+    //   const todoLoadedTitle = document.createElement('div');
+    //   const todoLoadedDescription = document.createElement('div');
+    //   const todoLoadedDuedate = document.createElement('div');
+    //   const todoLoadedPriority = document.createElement('div');
 
-    todoLoaded.classList.add('todo__load');
-    todoLoadedTitle.classList.add('todo__title');
-    todoLoadedDescription.classList.add('todo__description');
-    todoLoadedDuedate.classList.add('duedate');
-    todoLoadedPriority.classList.add('priority');
+    //   todoLoaded.classList.add('todo__load');
+    //   todoLoadedTitle.classList.add('todo__title');
+    //   todoLoadedDescription.classList.add('todo__description');
+    //   todoLoadedDuedate.classList.add('duedate');
+    //   todoLoadedPriority.classList.add('priority');
 
-    // Load todo info to the new divs
-    todoLoadedTitle.textContent = todoTitle;
-    todoLoadedDescription.textContent = todoDescription;
-    todoLoadedDuedate.textContent = todoDuedate;
-    todoLoadedPriority.textContent = todoPriority;
+    //   // Load todo info to the new divs
+    //   todoLoadedTitle.textContent = todoTitle;
+    //   todoLoadedDescription.textContent = todoDescription;
+    //   todoLoadedDuedate.textContent = todoDuedate;
+    //   todoLoadedPriority.textContent = todoPriority;
 
-    // Append todoLoaded to .todo__container
-    todoLoaded.append(todoLoadedTitle, todoLoadedDescription, todoLoadedDuedate, todoLoadedPriority);
-    todo.parentNode.parentNode.appendChild(todoLoaded);
+    //   // Edit button
+    //   const editButton = document.createElement('div');
+    //   editButton.classList.add('edit');
+    //   editButton.textContent = 'Edit';
+    //   editButton.addEventListener('click', fillAddTodoForm);
+
+    //   // Append todoLoaded to .todo__container
+    //   todoLoaded.append(todoLoadedTitle, todoLoadedDescription, todoLoadedDuedate, todoLoadedPriority, editButton);
+    //   todo.parentNode.parentNode.appendChild(todoLoaded);
+
+  //   /**
+  //  * Add todo's data to form
+  //  */
+  //   function fillAddTodoForm() {
+  //     document.querySelector('.title').value = todoTitle;
+  //     document.querySelector('.description').value = todoDescription;
+  //     document.querySelector('.add__duedate').value = todoDuedate.split(' ')[1];
+  //     document.querySelector(`#priority option[${todoPriority.split(' ')[1]}]`).selected = true;
+  //     document.querySelector(`#project option[${todoProject.split(' ')[1]}]`).selected = true;
+  //   }
+    // ==================================================================
   }
 }
 window.addEventListener('click', loadTodo);
+
 
 /**
  * Unfocuses todo if clicked on anywhere on the screen but the focused todo
  * @param {node} element
  */
 function unfocusTodo(element) {
-  const todoLoaded = document.querySelector('.todo__load');
+  const todoLoaded = document.querySelector('.edit__form');
   if (todoLoaded == null);
   else {
-    if (!element.target.matches('.todo__load') && !element.target.matches('.todo__title') && !element.target.matches('.todo__description') && !element.target.matches('.duedate') && !element.target.matches('.priority')) {
+    // if (!element.target.matches('.edit__form') && !element.target.matches('.todo__title') && !element.target.matches('.todo__description') && !element.target.matches('.duedate') && !element.target.matches('.priority')) {
+    if (element.target.matches('.underlay')) {
       const overlayLoaded = document.querySelector('.todo__overlay__loaded');
       overlayLoaded.classList.remove('todo__overlay__loaded');
 
@@ -257,6 +345,8 @@ function unfocusTodo(element) {
       });
 
       todoLoaded.remove();
+
+      element.target.remove();
     }
   }
 }
@@ -271,5 +361,5 @@ function loadAddTodo() {
 document.querySelector('.add__todo').addEventListener('click', loadAddTodo);
 
 export {
-  addProjectDOM, addTodoItemDOM, removeTodoItemDOM, loadSelectProjects,
+  addTodoItemDOM, removeTodoItemDOM, loadSelectProjects, removeAllTodoItemsDOM, unloadProjects,
 };
