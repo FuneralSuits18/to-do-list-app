@@ -1,14 +1,15 @@
-/* eslint-disable max-len */
-
+import dotenv from dotenv;
 import {initializeApp} from 'firebase/app';
 
+dotenv.config()
+
 const firebaseConfig = {
-  apiKey: 'AIzaSyDV2baezy09YizI-IP43HWLM9RM-2qJxzs',
-  authDomain: 'todo-app-dc17a.firebaseapp.com',
-  projectId: 'todo-app-dc17a',
-  storageBucket: 'todo-app-dc17a.appspot.com',
-  messagingSenderId: '981831796551',
-  appId: '1:981831796551:web:8c7a1ec7ba92c992022e62',
+  apiKey: process.env.apiKey,
+  authDomain: process.env.authDomain,
+  projectId: process.env.projectId,
+  storageBucket: process.env.storageBucket,
+  messagingSenderId: process.env.messagingSenderId,
+  appId: process.env.appId,
 };
 
 const app = initializeApp(firebaseConfig);
